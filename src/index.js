@@ -4,7 +4,7 @@ import _ from 'lodash'
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
 
-  _.times(3).forEach(async () => {
+  _.times(5).forEach(async () => {
     const { body: { drinks } } = await getRandomCocktail()
 
     drinks.forEach(({ strDrink }) => {
