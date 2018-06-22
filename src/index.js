@@ -8,21 +8,24 @@ document.addEventListener('DOMContentLoaded', () => {
   let counterCocktail = 1;
   _.times(countCocktails).forEach(async () => {
     const { body: { drinks } } = await getRandomCocktail()
-    
+
     drinks.forEach(({ strDrink, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strDrinkThumb, strInstructions
       }) => {
       const title_field = document.createElement('div')
       const title_text = document.createTextNode('title: '+strDrink)
       title_field.appendChild(title_text)
       root.appendChild(title_field)
+
       const image_field = document.createElement('img')
       image_field.setAttribute('src', strDrinkThumb)
       image_field.setAttribute('class', 'image-cocktail')
       root.appendChild(image_field)
+
       const instrunction_field = document.createElement('div')
       const instrunction_text = document.createTextNode('Instruction: '+ strInstructions)
       instrunction_field.appendChild(instrunction_text)
       root.appendChild(instrunction_field)
+
       let array_ingridients = [ strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15 ]
       const ingridients_field = document.createElement('div')
       ingridients_field.setAttribute('class', 'all_ingridients')
@@ -30,6 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const ingridient_text = document.createTextNode('Ingridients: ')
       ingridients_field.appendChild(ingridient_text)
       root.appendChild(ingridients_field)
+      
       const hr = document.createElement('hr')
       for (let i = 0; i < 15; i++) {
         if (array_ingridients[i] == '' || array_ingridients[i] == null || array_ingridients[i] == undefined) break
