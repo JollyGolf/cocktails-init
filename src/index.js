@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', () => {
       ingridientsField.appendChild(document.createTextNode('Ingridients: '))
       cocktailField.appendChild(ingridientsField)
       const hr = document.createElement('hr')
-      
+
       let ingridients = Object.keys(rest).filter((value) => value.match(/strIngredient\d+/))
       for (let key1 in rest) {
         for (let key2 of ingridients) {
@@ -46,63 +46,3 @@ document.addEventListener('DOMContentLoaded', () => {
     })
   })
 })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-      // let values_ingridients = Object.values(rest).filter((rest)=>  {
-      //   return rest.match(/strIngredient\d+/)
-      // })
-
-      // let ingridientss = rest.filter((rest) =>  {
-      //   return rest.match(/strIngredient\d+/)
-      // })
-      //console.log(Object.rest)
-      //console.log(ingridients)
-      //console.log(values_ingridients)
-
-      // ingridients.forEach( value => {
-      //   let ingridient = document.createTextNode(value+', ')
-      //   ingridientsField.appendChild(ingridient)
-      //   root.appendChild(hr)
-      //   //console.log('ingr => '+ingridient)
-      // })
-      
-      // var c = 100;
-      // window["War_" + c] = "it works"
-      // alert(War_100)
-
-      //window[ingridients]
-      //console.log(ingridients)
-      //console.log(ingridients)
-      //console.log(ingridients)
-      
-      
-      // var getTempItems = (...rest) => rest
-      // console.log(getTempItems)
-      //var getTempItems = (...rest) => rest;
-      // эквивалент
-      //var getTempItems = function() { return [].slice.apply(arguments) };
-
-      //console.log(Object.keys(drinks).filter((arguments) => arguments.match(/strIngredient \d+/)) )
-      
