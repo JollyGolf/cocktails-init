@@ -3,57 +3,106 @@ import _ from 'lodash'
 
 document.addEventListener('DOMContentLoaded', () => {
   const root = document.getElementById('root')
-  const countCocktails = 3;
-  _.times(countCocktails).forEach(async (_, index) => {
+  _.times(10).forEach(async (_, index) => {
     const { body: { drinks } } = await getRandomCocktail()
-
-    drinks.forEach(({ strDrink, strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient5, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15, strDrinkThumb, strInstructions
-      }) => {
+    drinks.forEach(({ strDrink, strDrinkThumb, strInstructions, ...rest}) => {
+      function setAttributes(el, attrs) {
+        Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]))
+      }
       const cocktailField = document.createElement('div')
-      cocktailField.setAttribute('class', 'cocktail')
-      cocktailField.setAttribute('class', 'root__cocktail')
-      cocktailField.setAttribute('class', 'cocktail_item_'+index)
+      setAttributes(cocktailField, { 'class': 'cocktail root__cocktail cocktail_item_'+index})
       root.appendChild(cocktailField)
 
       const titleField = document.createElement('div')
-      const titleText = document.createTextNode('title: '+strDrink)
-      titleField.appendChild(titleText)
+      titleField.appendChild(document.createTextNode('title: '+strDrink))
       cocktailField.appendChild(titleField)
 
       const imageField = document.createElement('img')
-      imageField.setAttribute('src', strDrinkThumb)
-      imageField.setAttribute('class', 'image')
-      imageField.setAttribute('class', 'cocktail__image')
+      setAttributes(imageField, { 'src': strDrinkThumb, 'class': 'image cocktail__image'})
       cocktailField.appendChild(imageField)
 
       const instructionField = document.createElement('div')
-      const instrunctionText = document.createTextNode('Instruction: '+ strInstructions)
-      instructionField.appendChild(instrunctionText)
+      instructionField.appendChild(document.createTextNode('Instruction: '+ strInstructions))
       cocktailField.appendChild(instructionField)
 
-      let uncheckedArrayIngridients = [ strIngredient1, strIngredient2, strIngredient3, strIngredient4, strIngredient6, strIngredient7, strIngredient8, strIngredient9, strIngredient10, strIngredient11, strIngredient12, strIngredient13, strIngredient14, strIngredient15 ]
-      let checkedArrayIngridients = uncheckedArrayIngridients.filter( value => {
-        return !!value 
-      })
       const ingridientsField = document.createElement('div')
-      ingridientsField.setAttribute('class', 'cocktail__ingridients')
-      ingridientsField.setAttribute('class', 'ingridient_item_'+index)
-      const ingridientText = document.createTextNode('Ingridients: ')
-      ingridientsField.appendChild(ingridientText)
+      setAttributes(ingridientsField, {'class': 'cocktail__ingridients ingridient_item_'+index})
+      ingridientsField.appendChild(document.createTextNode('Ingridients: '))
       cocktailField.appendChild(ingridientsField)
       const hr = document.createElement('hr')
-
-      checkedArrayIngridients.forEach( value => {
-        let ingridient = document.createTextNode(value+', ')
-        ingridientsField.appendChild(ingridient)
-        root.appendChild(hr)
-      })
-
-      let allIngridient = document.getElementsByClassName('ingridient_item_'+index)[0].textContent
-      allIngridient = allIngridient.slice(0, -2) + '.'
-      allIngridient = document.createTextNode(allIngridient)
-      while (ingridientsField.firstChild) ingridientsField.removeChild(ingridientsField.firstChild);
+      
+      let ingridients = Object.keys(rest).filter((value) => value.match(/strIngredient\d+/))
+      for (let key1 in rest) {
+        for (let key2 of ingridients) {
+          if(key1 == key2 && !!rest[key2]) {
+            ingridientsField.appendChild(document.createTextNode(rest[key2]+', '))
+            root.appendChild(hr)
+          } 
+        }
+      }
+      let allIngridient = document.createTextNode(document.getElementsByClassName('ingridient_item_'+index)[0].textContent.slice(0, -2) + '.')
+      while (ingridientsField.firstChild) ingridientsField.removeChild(ingridientsField.firstChild)
       ingridientsField.appendChild(allIngridient)
     })
   })
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+      // let values_ingridients = Object.values(rest).filter((rest)=>  {
+      //   return rest.match(/strIngredient\d+/)
+      // })
+
+      // let ingridientss = rest.filter((rest) =>  {
+      //   return rest.match(/strIngredient\d+/)
+      // })
+      //console.log(Object.rest)
+      //console.log(ingridients)
+      //console.log(values_ingridients)
+
+      // ingridients.forEach( value => {
+      //   let ingridient = document.createTextNode(value+', ')
+      //   ingridientsField.appendChild(ingridient)
+      //   root.appendChild(hr)
+      //   //console.log('ingr => '+ingridient)
+      // })
+      
+      // var c = 100;
+      // window["War_" + c] = "it works"
+      // alert(War_100)
+
+      //window[ingridients]
+      //console.log(ingridients)
+      //console.log(ingridients)
+      //console.log(ingridients)
+      
+      
+      // var getTempItems = (...rest) => rest
+      // console.log(getTempItems)
+      //var getTempItems = (...rest) => rest;
+      // эквивалент
+      //var getTempItems = function() { return [].slice.apply(arguments) };
+
+      //console.log(Object.keys(drinks).filter((arguments) => arguments.match(/strIngredient \d+/)) )
+      
