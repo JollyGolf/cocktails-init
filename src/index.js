@@ -25,24 +25,24 @@ document.addEventListener('DOMContentLoaded', () => {
       instructionField.appendChild(document.createTextNode('Instruction: '+ strInstructions))
       cocktailField.appendChild(instructionField)
 
-      const ingridientsField = document.createElement('div')
-      setAttributes(ingridientsField, {'class': 'cocktail__ingridients ingridient_item_'+index})
-      ingridientsField.appendChild(document.createTextNode('Ingridients: '))
-      cocktailField.appendChild(ingridientsField)
+      const ingredientsField = document.createElement('div')
+      setAttributes(ingredientsField, {'class': 'cocktail__ingridients ingridient_item_'+index})
+      ingredientsField.appendChild(document.createTextNode('Ingridients: '))
+      cocktailField.appendChild(ingredientsField)
       const hr = document.createElement('hr')
 
-      let ingridients = Object.keys(rest).filter((value) => value.match(/strIngredient\d+/))
+      let ingredients = Object.keys(rest).filter((value) => value.match(/strIngredient\d+/))
       for (let key1 in rest) {
-        for (let key2 of ingridients) {
+        for (let key2 of ingredients) {
           if(key1 == key2 && !!rest[key2]) {
-            ingridientsField.appendChild(document.createTextNode(rest[key2]+', '))
+            ingredientsField.appendChild(document.createTextNode(rest[key2]+', '))
             root.appendChild(hr)
           } 
         }
       }
-      let allIngridient = document.createTextNode(document.getElementsByClassName('ingridient_item_'+index)[0].textContent.slice(0, -2) + '.')
-      while (ingridientsField.firstChild) ingridientsField.removeChild(ingridientsField.firstChild)
-      ingridientsField.appendChild(allIngridient)
+      const allIngredient = document.createTextNode(document.getElementsByClassName('ingridient_item_'+index)[0].textContent.slice(0, -2) + '.')
+      while (ingredientsField.firstChild) ingredientsField.removeChild(ingredientsField.firstChild)
+      ingredientsField.appendChild(allIngredient)
     })
   })
 })
