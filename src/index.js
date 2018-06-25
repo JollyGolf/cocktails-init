@@ -31,15 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
       cocktailField.appendChild(ingredientsField)
       const hr = document.createElement('hr')
 
-      let ingredients = Object.keys(rest).filter((value) => value.match(/strIngredient\d+/))
-      for (let key1 in rest) {
-        for (let key2 of ingredients) {
-          if(key1 == key2 && !!rest[key2]) {
-            ingredientsField.appendChild(document.createTextNode(rest[key2]+', '))
+      Object.keys(rest).filter((value) => value.match(/strIngredient\d+/)).forEach((key) => {
+        if(!!rest[key]) {
+            ingredientsField.appendChild(document.createTextNode(rest[key]+', '))
             root.appendChild(hr)
           } 
-        }
-      }
+      })
       const allIngredient = document.createTextNode(document.getElementsByClassName('ingridient_item_'+index)[0].textContent.slice(0, -2) + '.')
       while (ingredientsField.firstChild) ingredientsField.removeChild(ingredientsField.firstChild)
       ingredientsField.appendChild(allIngredient)
