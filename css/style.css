@@ -1,3 +1,76 @@
-.cocktail__image{
-  height: 100px;
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.root {
+  height: 100%;
+  width: 100%;
+}
+
+.root_theme {
+  background-image: url(../image/cocktail-bg.png);
+  background-attachment: fixed;
+}
+
+.root_font_family {
+  font-family: MontExtraLight;
+}
+
+.root_font_size {
+  font-size: 17pt;
+  font-weight: bolder;
+}
+
+.main_field {
+  height: 100%;
+  width: 85%;
+  margin: auto;
+}
+
+.main_field_flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.cocktail {
+  width: 700px;
+  min-height: 500px;
+  margin: 10px;
+  padding: 15px;
+}
+
+.cocktail_flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.cocktail_theme {
+  background-image: url(../image/transparency-white.png);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.cocktail_theme:hover {
+  background-image: url(../image/transparency-light-blue.png);
+}
+
+.cocktail_border_size_s {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.cocktail__image {
+  height: 300px;
+  text-align: right;
+  margin: 10px;
+}
+
+.text {
+  margin: 10px;
+  text-align: justify;
 }
