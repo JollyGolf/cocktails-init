@@ -1,0 +1,39 @@
+.cocktail {
+  width: 700px;
+  min-height: 500px;
+  margin: 10px;
+  padding: 15px;
+}
+
+.mainfield__cocktail-flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.mainfield__cocktail-theme-transparency {
+  background-image: url(/image/transparency-white.png);
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.mainfield__cocktail-theme-transparency:hover {
+  background-image: url(/image/transparency-light-blue.png);
+}
+
+.mainfield__cocktail-border-size-s {
+  border: 2px solid black;
+  border-radius: 10px;
+}
+
+.cocktail__image {
+  height: 300px;
+  text-align: right;
+  margin: 10px;
+}
+
+.text {
+  margin: 10px;
+  text-align: justify;
+}
