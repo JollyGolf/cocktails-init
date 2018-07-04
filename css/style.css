@@ -1,3 +1,40 @@
-.cocktail__image{
-  height: 100px;
+@import 'cocktail/cocktail.css';
+@import 'fonts/font.css';
+
+body {
+  margin: 0px;
+  padding: 0px;
+}
+
+.container {
+  height: 100%;
+  width: 100%;
+}
+
+.container-theme-transparency {
+  background-image: url(/image/cocktail-bg.png);
+  background-attachment: fixed;
+}
+
+.container-font-family {
+  font-family: MontExtraLight;
+}
+
+.container-font-size-m {
+  font-size: 17pt;
+  font-weight: bolder;
+}
+
+.mainfield {
+  height: 100%;
+  width: 85%;
+  margin: auto;
+}
+
+.mainfield-flexbox {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
 }
