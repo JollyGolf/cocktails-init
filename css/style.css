@@ -1,4 +1,5 @@
 @import 'cocktail/cocktail.css';
+@import 'details/details.css';
 @import 'fonts/font.css';
 
 body {
@@ -37,4 +38,13 @@ body {
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.details {
+  color: white;
+}
+
+.details-flexbox {
+  display: flex;
+  flex-direction: column;
 }
