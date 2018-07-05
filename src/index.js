@@ -1,7 +1,6 @@
 /* global document */
 import _ from 'lodash';
 import { getRandomCocktail, getFullCocktailDetailsById } from './api';
-//import { getFullCocktailDetailsById } from './api/';
 
 document.addEventListener('DOMContentLoaded', () => {
   const mainField = document.getElementById('mainfield');
@@ -92,27 +91,47 @@ document.addEventListener('DOMContentLoaded', () => {
             detailDateModified.appendChild(document.createTextNode('dateModified: ' + dateModified));
             detailsfield.appendChild(detailDateModified);
 
-            const detailIngredients = document.createElement('div');
-            setAttributes(detailIngredients, { class: `ingredient-item-${index}` });
-            detailIngredients.appendChild(document.createTextNode('Ingredients and Measures: '));
-            detailsfield.appendChild(detailIngredients);
+            const tableView = document.createElement('table');
+            detailsfield.appendChild(tableView);
+            const trElementTitle = document.createElement('tr');
+            const tdElementIngredient = document.createElement('td');
+            tdElementIngredient.appendChild(document.createTextNode('Ingredient'));
+            const tdElementMeasure = document.createElement('td');
+            tdElementMeasure.appendChild(document.createTextNode('Measure'));
+            trElementTitle.appendChild(tdElementIngredient);
+            trElementTitle.appendChild(tdElementMeasure);
+            tableView.appendChild(trElementTitle);
+            
             Object.keys(rest)
               .filter(value => value.match(/strIngredient\d+/))
-              .forEach((key) => {
+              .forEach((key, index) => {
                 if (rest[key]) {
-                  detailIngredients.appendChild(document.createTextNode(`${rest[key]}, `));
+                  const trElementI = document.createElement('tr');
+                  setAttributes(trElementI, { class: `tr-item-${index}` });
+                  const tdElementI = document.createElement('td');
+                  tdElementI.appendChild(document.createTextNode(rest[key]));
+                  trElementI.appendChild(tdElementI);
+                  tableView.appendChild(trElementI);
                 }
               });
-            const allIngredients = document.createTextNode(`${document.getElementsByClassName(`ingredient-item-${index}`)[0].textContent.slice(0, -2)}.`);
-            while (detailIngredients.firstChild) detailIngredients.removeChild(detailIngredients.firstChild);
-            detailIngredients.appendChild(allIngredient);
+              
+            Object.keys(rest)
+              .filter(value => value.match(/strMeasure\d+/))
+              .forEach((key, index) => {
+                if (rest[key] && rest[key] != ' ' && rest[key] != '\n') {
+                  const trElementM = document.getElementsByClassName(`tr-item-${index}`)[0];
+                  const tdElementM = document.createElement('td');
+                  tdElementM.appendChild(document.createTextNode(rest[key]));
+                  trElementM.appendChild(tdElementM);
+                tableView.appendChild(trElementM);
+                }
+              });
 
             document.getElementById('btnBack').addEventListener('click', () => {
               detailsfield.innerHTML = '<div id="btnBack">Back to Cocktails</div>';
               mainField.style.display = 'flex';
               detailsfield.style.display = 'none';
             });
-
           });
         });
       }
