@@ -1,4 +1,5 @@
 /* global document */
+
 import _ from 'lodash';
 import { getRandomCocktail, getFullCocktailDetailsById } from './api';
 
@@ -6,7 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const mainField = document.getElementById('mainfield');
   const detailsfield = document.getElementById('detailsfield');
   detailsfield.style.display = 'none';
-  mainfield.style.display = 'flex';
+  mainField.style.display = 'flex';
   _.times(10).forEach(async (index) => {
     const { body: { drinks } } = await getRandomCocktail();
     drinks.forEach(({
@@ -53,52 +54,52 @@ document.addEventListener('DOMContentLoaded', () => {
         const urlById = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${currentIdCocktail}`;
         mainField.style.display = 'none';
         detailsfield.style.display = 'flex';
-
-        _.times(1).forEach(async (index) => {
+        _.times(1).forEach(async () => {
           const { body: { drinks } } = await getFullCocktailDetailsById(urlById);
           drinks.forEach(({
-            idDrink, strDrink, strCategory, strAlcoholic, strGlass, strInstructions, strDrinkThumb, dateModified, ...rest
+            idDrink, strDrink, strCategory, strAlcoholic, strGlass,
+            strInstructions, strDrinkThumb, dateModified, ...rest2
           }) => {
-            const detimage = document.getElementById('detimage');
-            const detdescription = document.getElementById('detdescription');
-            const dettable = document.getElementById('dettable');
+            const detImage = document.getElementById('detimage');
+            const detDescription = document.getElementById('detdescription');
+            const detTable = document.getElementById('dettable');
 
-            const imageField = document.createElement('img');
-            setAttributes(imageField, { src: strDrinkThumb, class: 'detimage__image' });
-            detimage.appendChild(imageField);
+            const detailImage = document.createElement('img');
+            setAttributes(detailImage, { src: strDrinkThumb, class: 'detimage__image' });
+            detImage.appendChild(detailImage);
 
             const detailId = document.createElement('div');
             detailId.appendChild(document.createTextNode(`id: ${idDrink}`));
-            detdescription.appendChild(detailId);
+            detDescription.appendChild(detailId);
 
             const detailDrink = document.createElement('div');
             detailDrink.appendChild(document.createTextNode(`title: ${strDrink}`));
-            detdescription.appendChild(detailDrink);
+            detDescription.appendChild(detailDrink);
 
             const detailCategory = document.createElement('div');
             detailCategory.appendChild(document.createTextNode(`category: ${strCategory}`));
-            detdescription.appendChild(detailCategory);
+            detDescription.appendChild(detailCategory);
 
             const detailAlcoholic = document.createElement('div');
             detailAlcoholic.appendChild(document.createTextNode(`Alcoholic: ${strAlcoholic}`));
-            detdescription.appendChild(detailAlcoholic);
+            detDescription.appendChild(detailAlcoholic);
 
             const detailGlass = document.createElement('div');
             detailGlass.appendChild(document.createTextNode(`Glass: ${strGlass}`));
-            detdescription.appendChild(detailGlass);
+            detDescription.appendChild(detailGlass);
 
             const detailInstructions = document.createElement('div');
             detailInstructions.appendChild(document.createTextNode(`Instructions: ${strInstructions}`));
             setAttributes(detailInstructions, { class: 'detdescription__instruction' });
-            detdescription.appendChild(detailInstructions);
+            detDescription.appendChild(detailInstructions);
 
             const detailDateModified = document.createElement('div');
             detailDateModified.appendChild(document.createTextNode(`dateModified: ${dateModified}`));
-            detdescription.appendChild(detailDateModified);
+            detDescription.appendChild(detailDateModified);
 
             const tableView = document.createElement('table');
             setAttributes(tableView, { class: 'dettable__table' });
-            dettable.appendChild(tableView);
+            detTable.appendChild(tableView);
             const trElementTitle = document.createElement('tr');
             const tdElementIngredient = document.createElement('td');
             tdElementIngredient.appendChild(document.createTextNode('Ingredient'));
@@ -108,26 +109,26 @@ document.addEventListener('DOMContentLoaded', () => {
             trElementTitle.appendChild(tdElementMeasure);
             tableView.appendChild(trElementTitle);
 
-            Object.keys(rest)
+            Object.keys(rest2)
               .filter(value => value.match(/strIngredient\d+/))
-              .forEach((key, index) => {
-                if (rest[key]) {
+              .forEach((key, index1) => {
+                if (rest2[key]) {
                   const trElementI = document.createElement('tr');
-                  setAttributes(trElementI, { class: `tr-item-${index}` });
+                  setAttributes(trElementI, { class: `tr-item-${index1}` });
                   const tdElementI = document.createElement('td');
-                  tdElementI.appendChild(document.createTextNode(rest[key]));
+                  tdElementI.appendChild(document.createTextNode(rest2[key]));
                   trElementI.appendChild(tdElementI);
                   tableView.appendChild(trElementI);
                 }
               });
 
-            Object.keys(rest)
+            Object.keys(rest2)
               .filter(value => value.match(/strMeasure\d+/))
-              .forEach((key, index) => {
-                if (rest[key] && rest[key] != ' ' && rest[key] != '\n') {
-                  const trElementM = document.getElementsByClassName(`tr-item-${index}`)[0];
+              .forEach((key, index2) => {
+                if (rest2[key] && rest2[key] !== ' ' && rest2[key] !== '\n') {
+                  const trElementM = document.getElementsByClassName(`tr-item-${index2}`)[0];
                   const tdElementM = document.createElement('td');
-                  tdElementM.appendChild(document.createTextNode(rest[key]));
+                  tdElementM.appendChild(document.createTextNode(rest2[key]));
                   trElementM.appendChild(tdElementM);
                   tableView.appendChild(trElementM);
                 }
