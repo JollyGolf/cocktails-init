@@ -16,12 +16,11 @@ document.addEventListener('DOMContentLoaded', () => {
         Object.keys(attrs).forEach(key => el.setAttribute(key, attrs[key]));
       }
       const cocktailField = document.createElement('div');
-      setAttributes(cocktailField, {'data-id': idDrink, class: `cocktail mainfield__cocktail mainfield__cocktail-flexbox mainfield__cocktail-theme-transparency mainfield__cocktail-border-size-s cocktail-item-${index}` });
-      cocktailField.addEventListener('click', lookupFullCocktailDetailsById);
+      setAttributes(cocktailField, { 'data-id': idDrink, class: `cocktail mainfield__cocktail mainfield__cocktail-flexbox mainfield__cocktail-theme-transparency mainfield__cocktail-border-size-s cocktail-item-${index}` });
       mainField.appendChild(cocktailField);
 
       const imageField = document.createElement('img');
-      setAttributes(imageField, {src: strDrinkThumb, class: 'cocktail__image' });
+      setAttributes(imageField, { src: strDrinkThumb, class: 'cocktail__image' });
       cocktailField.appendChild(imageField);
 
       const titleField = document.createElement('div');
@@ -33,7 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setAttributes(ingredientsField, { class: `cocktail__ingredients ingredient-item-${index} text` });
       ingredientsField.appendChild(document.createTextNode('Ingredients: '));
       cocktailField.appendChild(ingredientsField);
-  
+
       Object.keys(rest)
         .filter(value => value.match(/strIngredient\d+/))
         .forEach((key) => {
@@ -51,48 +50,55 @@ document.addEventListener('DOMContentLoaded', () => {
 
       function lookupFullCocktailDetailsById() {
         const currentIdCocktail = cocktailField.getAttribute('data-id');
-        const urlById = 'https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=' + currentIdCocktail;
+        const urlById = `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${currentIdCocktail}`;
         mainField.style.display = 'none';
         detailsfield.style.display = 'flex';
+
         _.times(1).forEach(async (index) => {
           const { body: { drinks } } = await getFullCocktailDetailsById(urlById);
           drinks.forEach(({
             idDrink, strDrink, strCategory, strAlcoholic, strGlass, strInstructions, strDrinkThumb, dateModified, ...rest
           }) => {
+            const detimage = document.getElementById('detimage');
+            const detdescription = document.getElementById('detdescription');
+            const dettable = document.getElementById('dettable');
+
             const imageField = document.createElement('img');
-            setAttributes(imageField, {src: strDrinkThumb, class: 'details__image' });
-            detailsfield.appendChild(imageField);
+            setAttributes(imageField, { src: strDrinkThumb, class: 'detimage__image' });
+            detimage.appendChild(imageField);
 
             const detailId = document.createElement('div');
-            detailId.appendChild(document.createTextNode('id: ' + idDrink));
-            detailsfield.appendChild(detailId);
+            detailId.appendChild(document.createTextNode(`id: ${idDrink}`));
+            detdescription.appendChild(detailId);
 
             const detailDrink = document.createElement('div');
-            detailDrink.appendChild(document.createTextNode('title: ' + strDrink));
-            detailsfield.appendChild(detailDrink);
+            detailDrink.appendChild(document.createTextNode(`title: ${strDrink}`));
+            detdescription.appendChild(detailDrink);
 
             const detailCategory = document.createElement('div');
-            detailCategory.appendChild(document.createTextNode('category: ' + strCategory));
-            detailsfield.appendChild(detailCategory);
+            detailCategory.appendChild(document.createTextNode(`category: ${strCategory}`));
+            detdescription.appendChild(detailCategory);
 
             const detailAlcoholic = document.createElement('div');
-            detailAlcoholic.appendChild(document.createTextNode('Alcoholic: ' + strAlcoholic));
-            detailsfield.appendChild(detailAlcoholic);
+            detailAlcoholic.appendChild(document.createTextNode(`Alcoholic: ${strAlcoholic}`));
+            detdescription.appendChild(detailAlcoholic);
 
             const detailGlass = document.createElement('div');
-            detailGlass.appendChild(document.createTextNode('Glass: ' + strGlass));
-            detailsfield.appendChild(detailGlass);
+            detailGlass.appendChild(document.createTextNode(`Glass: ${strGlass}`));
+            detdescription.appendChild(detailGlass);
 
             const detailInstructions = document.createElement('div');
-            detailInstructions.appendChild(document.createTextNode('Instructions: ' + strInstructions));
-            detailsfield.appendChild(detailInstructions);
+            detailInstructions.appendChild(document.createTextNode(`Instructions: ${strInstructions}`));
+            setAttributes(detailInstructions, { class: 'detdescription__instruction' });
+            detdescription.appendChild(detailInstructions);
 
             const detailDateModified = document.createElement('div');
-            detailDateModified.appendChild(document.createTextNode('dateModified: ' + dateModified));
-            detailsfield.appendChild(detailDateModified);
+            detailDateModified.appendChild(document.createTextNode(`dateModified: ${dateModified}`));
+            detdescription.appendChild(detailDateModified);
 
             const tableView = document.createElement('table');
-            detailsfield.appendChild(tableView);
+            setAttributes(tableView, { class: 'dettable__table' });
+            dettable.appendChild(tableView);
             const trElementTitle = document.createElement('tr');
             const tdElementIngredient = document.createElement('td');
             tdElementIngredient.appendChild(document.createTextNode('Ingredient'));
@@ -101,7 +107,7 @@ document.addEventListener('DOMContentLoaded', () => {
             trElementTitle.appendChild(tdElementIngredient);
             trElementTitle.appendChild(tdElementMeasure);
             tableView.appendChild(trElementTitle);
-            
+
             Object.keys(rest)
               .filter(value => value.match(/strIngredient\d+/))
               .forEach((key, index) => {
@@ -114,7 +120,7 @@ document.addEventListener('DOMContentLoaded', () => {
                   tableView.appendChild(trElementI);
                 }
               });
-              
+
             Object.keys(rest)
               .filter(value => value.match(/strMeasure\d+/))
               .forEach((key, index) => {
@@ -123,18 +129,19 @@ document.addEventListener('DOMContentLoaded', () => {
                   const tdElementM = document.createElement('td');
                   tdElementM.appendChild(document.createTextNode(rest[key]));
                   trElementM.appendChild(tdElementM);
-                tableView.appendChild(trElementM);
+                  tableView.appendChild(trElementM);
                 }
               });
 
             document.getElementById('btnBack').addEventListener('click', () => {
-              detailsfield.innerHTML = '<div id="btnBack">Back to Cocktails</div>';
+              detailsfield.innerHTML = '<div class="partdescription detailsfield__partdescription partdescription-flexbox partdescription-theme-dark"><div id="detimage" class="detimage partdescription__detimage detimage-flexbox"></div><div id="detdescription" class="detdescription partdescription__detdesctiption detdescription-flexbox"></div></div><div class="partingredients detailsfield__partingredients partingredients-flexbox"><div id="dettable" class="dettable partingredients__dettable dettable-flexbox partingredients-theme-color"></div></div><div id="btnBack" class="details__btn details__btn-font-size">Back to Cocktails</div>';
               mainField.style.display = 'flex';
               detailsfield.style.display = 'none';
             });
           });
         });
       }
+      cocktailField.addEventListener('click', lookupFullCocktailDetailsById);
     });
   });
 });

@@ -2,6 +2,12 @@
 @import 'details/details.css';
 @import 'fonts/font.css';
 
+html {
+  background-image: url(/image/cocktail-bg.png);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
 body {
   margin: 0px;
   padding: 0px;
@@ -10,11 +16,6 @@ body {
 .container {
   height: 100%;
   width: 100%;
-}
-
-.container-theme-transparency {
-  background-image: url(/image/cocktail-bg.png);
-  background-attachment: fixed;
 }
 
 .container-font-family {
@@ -41,11 +42,12 @@ body {
 }
 
 .details {
-  width: 50%;
   color: white;
 }
 
 .details-flexbox {
   display: flex;
   flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }
