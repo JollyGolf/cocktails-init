@@ -1,63 +1,63 @@
-.partdescription-flexbox {
+.part-description-flexbox {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
 }
 
-.partingredients-flexbox {
+.part-ingredients-flexbox {
   display: flex;
   justify-content: space-around;
   align-items: center;
   flex-direction: row;
 }
 
-.partdescription__detdesctiption {
+.part-description__det-desctiption {
   height: 600px;
 }
 
-.partdescription-theme-dark {
+.part-description-theme-dark {
   border: 2px solid black;
   border-radius: 10px;
   background-image: url(/image/transparency-grey.png);
 }
 
-.partingredients-theme-color {
+.part-ingredients-theme-color {
   border: 2px solid black;
   border-radius: 5px;
   background-image: url(/image/transparency-blue.png);
 }
 
-.dettable {
+.det-table {
   margin: 20px;
   padding: 20px;
 }
 
-.dettable__table {
+.det-table__table {
   width: 500px;
   text-align: center;
 }
 
-.detimage__image {
+.det-image__image {
   max-height: 600px;
   max-width: 600px;
   margin: 20px;
 }
 
-.detimage-flexbox {
+.det-image-flexbox {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.detdescription-flexbox {
+.det-description-flexbox {
   display: flex;
   justify-content: space-around;
   align-items: left;
   flex-direction: column;
 }
 
-.detailsfield__partdescription {
+.details-field__part-description {
   margin: 20px;
   width: 90%;
 }
@@ -71,7 +71,7 @@
   font-size: 19pt;
 }
 
-.detdescription__instruction {
+.det-description__instruction {
   text-align: justify;
   margin-right: 20px;
 }
