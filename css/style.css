@@ -1,5 +1,12 @@
 @import 'cocktail/cocktail.css';
+@import 'details/details.css';
 @import 'fonts/font.css';
+
+html {
+  background-image: url(/image/cocktail-bg.png);
+  background-size: cover;
+  background-attachment: fixed;
+}
 
 body {
   margin: 0px;
@@ -11,11 +18,6 @@ body {
   width: 100%;
 }
 
-.container-theme-transparency {
-  background-image: url(/image/cocktail-bg.png);
-  background-attachment: fixed;
-}
-
 .container-font-family {
   font-family: MontExtraLight;
 }
@@ -25,16 +27,27 @@ body {
   font-weight: bolder;
 }
 
-.mainfield {
+.main-field {
   height: 100%;
   width: 85%;
   margin: auto;
 }
 
-.mainfield-flexbox {
+.main-field-flexbox {
   display: flex;
   flex-direction: row;
   justify-content: space-around;
   align-items: center;
   flex-wrap: wrap;
+}
+
+.details {
+  color: white;
+}
+
+.details-flexbox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
 }

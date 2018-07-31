@@ -5,3 +5,4 @@ const ENDPOINTS = {
 }
 
 export const getRandomCocktail = () => superagent.get(ENDPOINTS.random);
+export const getFullCocktailDetailsById = (urlById) => superagent.get(urlById);
